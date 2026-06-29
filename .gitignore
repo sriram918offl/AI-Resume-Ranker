@@ -1,0 +1,19 @@
+# Hackathon data — NOT committed
+candidates.jsonl
+candidates.jsonl.gz
+
+# Generated submission CSV (re-generate via reproduce command)
+submission.csv
+submission_v1.csv
+test_cache.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/

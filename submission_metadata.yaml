@@ -1,0 +1,100 @@
+# Redrob Hackathon — Submission Metadata
+# Fill in [TODO] fields before submitting via the portal.
+
+team_name: "[TODO: your-team-name]"
+
+primary_contact:
+  name: "Sriram"
+  email: "sriram0071809@gmail.com"
+  phone: "[TODO: +91-XXXXXXXXXX]"
+
+team_members:
+  - name: "Sriram"
+    email: "sriram0071809@gmail.com"
+    role: "Solo participant"
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/sriram918offl/redrob-ranker"
+# [TODO: update if you create the repo under a different name]
+
+sandbox_link: "https://huggingface.co/spaces/sriram918offl/redrob-ranker"
+# [TODO: update to your actual HF Spaces URL after deploy]
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv --semantic-cache ./semantic_cache.json"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Windows 11 laptop (development); HF Spaces Free CPU (sandbox)"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.10.10"
+  os: "Windows 11 / Linux container"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: true
+  pre_computation_time_minutes: 5   # for embedding all 100K candidates once
+
+# ============================================================================
+# AI tools declaration  (honest, per spec §10.4)
+# ============================================================================
+ai_tools_used:
+  - "Claude"
+
+ai_usage_summary: |
+  Used Claude (Anthropic) extensively as a pair-programming partner for
+  architecture discussion, code review, and pattern engineering. Specifically:
+
+  - Discussed scoring component design and weight allocation against the JD's
+    explicit ideal-candidate profile.
+  - Wrote first drafts of feature extraction, scoring, honeypot detection,
+    reasoning generator with Claude; reviewed and edited every line.
+  - Used Claude to interpret the JD's nuanced asks (e.g., the "Tier 5 candidate"
+    trap, anti-keyword-stuffer principle, consulting-firm-only disqualifier).
+
+  No candidate data was fed to any LLM. The ranker itself contains zero LLM
+  calls (compute constraint compliance). All design decisions and final code
+  were verified by the human author.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Multi-component deterministic ranker. Per-candidate score is the weighted sum:
+
+    0.28 * title_career   (title match + career-history evidence phrases)
+    0.22 * skills         (required-cluster coverage with proficiency × endorsements × duration trust multiplier)
+    0.13 * experience     (bell curve around JD's ideal 6-8 yrs)
+    0.17 * jd_alignment   (production-deployment signals, anti-keyword-stuffer, anti-consulting-only, anti-research-only, anti-framework-enthusiast)
+    0.05 * location       (Pune/Noida primary, Indian metros bonus, relocation aware)
+    0.15 * semantic       (cached cosine vs JD seed text via all-MiniLM-L6-v2)
+
+  Then multiplied by a behavioral modifier (0.4..1.0) combining recruiter
+  response rate, recency, profile completeness, interview completion rate,
+  open-to-work flag. Honeypot heuristics (impossible YoE vs role-duration sum,
+  expert-with-zero-endorsement clusters, synthetic uniform durations) apply a
+  subtractive penalty. Final score clamped [0, 1].
+
+  Sentence-transformers embeddings (all-MiniLM-L6-v2, 90 MB, CPU) are
+  pre-computed once for all 100K candidates against a hand-distilled JD seed
+  text. The ranking step itself never loads the model — it reads cached
+  cosine scores from JSON. Total ranking runtime: ~17 seconds for 100K.
+
+  The decisive design moves: (1) trust multiplier on skills catches lazy
+  keyword stuffing; (2) career-history phrase matching catches the JD's "Tier
+  5" trap (non-AI-titled candidates who actually built ranking systems);
+  (3) behavioral modifier respects the JD's explicit principle that low
+  engagement means "for hiring purposes, not actually available."
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
