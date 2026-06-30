@@ -3,4 +3,4 @@ sentence-transformers>=2.5  # CPU-only embeddings
 scikit-learn>=1.3            # for cosine similarity, normalisation
 tqdm>=4.66                   # progress bars
 pyyaml>=6.0                  # metadata
-gradio>=5.0,<6.0             # HF Spaces sandbox UI (5.x is compatible with current huggingface_hub)
+gradio>=5.30,<6.0            # 5.30+ fixes the `if "const" in schema` bool-schema bug

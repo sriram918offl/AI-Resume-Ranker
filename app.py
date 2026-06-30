@@ -158,9 +158,7 @@ with gr.Blocks(title="Redrob Ranker — Sandbox", theme=gr.themes.Soft()) as dem
         api_name="rank",
     )
 
-# show_api=False disables the /api/info endpoint that triggers a known
-# TypeError in gradio_client/utils.py (`if "const" in schema` fails when
-# `schema` is a bool). The actual click handler uses a separate endpoint
-# and is unaffected.
 if __name__ == "__main__":
-    demo.queue().launch(show_api=False, ssr_mode=False)
+    # show_api=False is belt-and-braces in case any schema introspection
+    # bug shows up; not strictly required on gradio 5.30+.
+    demo.queue().launch(show_api=False)
