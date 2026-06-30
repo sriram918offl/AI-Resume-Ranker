@@ -1,3 +1,16 @@
+---
+title: AI Resume Ranker
+emoji: 🎯
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app.py
+pinned: false
+license: mit
+short_description: CPU-only ranker for the Redrob Senior AI Engineer JD
+---
+
 # Redrob Ranker — Senior AI Engineer JD
 
 A CPU-only, no-network ranker for the [Intelligent Candidate Discovery & Ranking Challenge](https://redrob.ai/hackathon). Ranks 100,000 candidates against the released Senior AI Engineer JD in **~17 seconds** on a 16 GB CPU machine.

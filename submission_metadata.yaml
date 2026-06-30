@@ -16,11 +16,9 @@ team_members:
 # ============================================================================
 # Code and reproducibility
 # ============================================================================
-github_repo: "https://github.com/sriram918offl/redrob-ranker"
-# [TODO: update if you create the repo under a different name]
+github_repo: "https://github.com/sriram918offl/AI-Resume-Ranker"
 
-sandbox_link: "https://huggingface.co/spaces/sriram918offl/redrob-ranker"
-# [TODO: update to your actual HF Spaces URL after deploy]
+sandbox_link: "https://huggingface.co/spaces/Sriram1118/ai-resume-ranker"
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv --semantic-cache ./semantic_cache.json"
 
