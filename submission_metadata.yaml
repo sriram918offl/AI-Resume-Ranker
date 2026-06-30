@@ -1,16 +1,16 @@
 # Redrob Hackathon — Submission Metadata
 # Fill in [TODO] fields before submitting via the portal.
 
-team_name: "Sriram (solo)"
+team_name: "Sriram.dev"
 
 primary_contact:
   name: "Sriram"
-  email: "sriram0071809@gmail.com"
-  phone: "[TODO: +91-XXXXXXXXXX]"  # ← Edit this line BEFORE pushing the final commit
+  email: "sriram918offl@gmail.com"
+  phone: "91-9486537565"  # ← Edit this line BEFORE pushing the final commit
 
 team_members:
   - name: "Sriram"
-    email: "sriram0071809@gmail.com"
+    email: "sriram918offl@gmail.com"
     role: "Solo participant"
 
 # ============================================================================
